@@ -19,7 +19,8 @@ if __name__=='__main__':
     sense_id_sense_def=cursor.fetchall()
     for sense_id,sense_def in sense_id_sense_def:
         cursor.execute('select lemma_type from cwn_lemma where lemma_id="%s"' % sense_id[:6])
-        print(cursor.fetchall())
+        if not cursor.fetchall():
+            print(sense_id,sense_def)
 
     cursor.execute('select lemma_id,lemma_type from cwn_lemma')
     for lemma_id,lemma_type in cursor.fetchall():
